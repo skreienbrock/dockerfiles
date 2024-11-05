@@ -1,0 +1,31 @@
+version: '3'
+services:
+  mediawiki:
+    image:  mediawiki 
+    restart: always
+    ports:
+      # if root and ports are ok ..
+      # - 80:80
+      # - 443:443
+      # if most ports are in use ..
+      - 6080:80
+      - 6443:443
+    links:
+      - database
+    volumes:
+      - codex_images:/var/www/html/images
+  database:
+    image: mariadb
+    restart: always
+    platform: linux/amd64
+    environment:
+      MARIADB_DATABASE: some_wiki
+      MARIADB_USER: wikiuser
+      MARIADB_PASSWORD: wikiuser
+      MARIADB_ROOT_PASSWORD: weirdo
+    volumes:
+      - codex_database:/var/lib/mysql
+
+volumes:
+  codex_images: 
+  codex_database: 
