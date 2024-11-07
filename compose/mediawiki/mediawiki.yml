@@ -13,7 +13,7 @@ services:
     links:
       - database
     volumes:
-      - codex_images:/var/www/html/images
+      - images:/var/www/html/images
   database:
     image: mariadb
     restart: always
@@ -24,8 +24,8 @@ services:
       MARIADB_PASSWORD: wikiuser
       MARIADB_ROOT_PASSWORD: weirdo
     volumes:
-      - codex_database:/var/lib/mysql
+      - database:/var/lib/mysql
 
 volumes:
-  codex_images: 
-  codex_database: 
+  images: 
+  database: 
